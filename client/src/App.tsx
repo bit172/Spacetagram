@@ -5,7 +5,7 @@ function App() {
   const [pod, setPOD] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/", { method: "GET" })
+    fetch("/api/", { method: "GET" })
       .then((res) => res.json())
       .then((data) => setPOD(data));
   }, []);
