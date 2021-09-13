@@ -7,6 +7,7 @@ import nasaApiInstance from "./nasa-api";
 import path from "path";
 
 const app: Application = express();
+const PORT = process.env.PORT || 5000;
 
 db.authenticate()
   .then(() => console.log("Connection established"))
@@ -31,6 +32,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(5000, () => {
-  console.log("Server Running");
+app.listen(PORT, () => {
+  console.log(`Server Running on port ${PORT}`);
 });
