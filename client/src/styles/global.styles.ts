@@ -6,14 +6,14 @@ const GlobalStyles = createGlobalStyle`
   --white: #FFFFFF;
   --off-white: #F5F5F5; 
   --black: #000000;
-  --blue: #0496FF;
-  --yellow: #FFF9AE;
+  --bg-primary: #e3e3e3;
   --instagram-purple: #9e33b6;
   --header-z-index: 20;
   --header-height: 100px;
   --header-mobile-height: 63px;
   }
   html {
+    background: var(--bg-primary);
     font-size: 16px;
   }
   body {
@@ -28,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .container {
     margin: 0 auto;
-    max-width: 1230px;
+    max-width: 768px;
     padding: 0 10px;
     
     ${media.greaterThan('laptop')`
