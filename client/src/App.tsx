@@ -1,20 +1,28 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import Post from './components/post/post.component';
+import { APOD } from './interfaces/apod.interface';
 
 function App() {
-  const [pod, setPOD] = useState(null);
+  const [apods, setAPODs] = useState<APOD[]>([]);
 
   useEffect(() => {
-    fetch("/api/", { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => setPOD(data));
+    fetch('/api/', { method: 'GET' })
+      .then(res => res.json())
+      .then(data => setAPODs(data));
   }, []);
 
-  if (!pod) return <div>Loading...</div>;
+  if (!apods) return <div>Loading...</div>;
 
   return (
-    <div>
-      <pre>{JSON.stringify(pod, null, 2)}</pre>
-    </div>
+    <React.Fragment>
+      <main className="container">
+        <section>
+          {apods.map(apod => (
+            <Post apod={apod} />
+          ))}
+        </section>
+      </main>
+    </React.Fragment>
   );
 }
 
