@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { APOD } from '../../interfaces/apod.interface';
+import Like from '../like/like.component';
 import VideoWrapper from '../video-wrapper/video-wrapper.component';
 
 const PostContainer = styled.article`
@@ -17,6 +18,10 @@ const PostContainer = styled.article`
     padding: 20px;
     border-width: 1px 1px 1px 1px;
   }
+  .button-row {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 export interface PostProps {
   apod: APOD;
@@ -32,7 +37,11 @@ export default function Post({ apod }: PostProps) {
       )}
       <section className="explanation">
         <h2>{apod.title}</h2>
+        <p>{apod.date}</p>
         <p>{apod.explanation}</p>
+        <div className="button-row">
+          <Like />
+        </div>
       </section>
     </PostContainer>
   );
