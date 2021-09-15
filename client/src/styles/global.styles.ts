@@ -17,7 +17,12 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
   }
   body {
+    margin: 30px 0;
     font-size: 1.1rem;
+  }
+  p {
+    letter-spacing: 1.03px;
+    line-height: 1.6
   }
   img {
     max-width: 100%;
