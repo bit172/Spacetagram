@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, AriaRole } from 'react';
 import styled from 'styled-components';
 
 // Source: https://www.joshwcomeau.com/snippets/react-components/visually-hidden/
@@ -17,10 +17,12 @@ const VisuallyHiddenSpan = styled.span`
 
 export interface VisuallyHiddenProps {
   children: any;
+  role?: AriaRole;
 }
 
 export default function VisuallyHidden({
   children,
+  role,
   ...delegated
 }: VisuallyHiddenProps) {
   const [forceShow, setForceShow] = useState(false);
@@ -50,5 +52,9 @@ export default function VisuallyHidden({
     return children;
   }
 
-  return <VisuallyHiddenSpan {...delegated}>{children}</VisuallyHiddenSpan>;
+  return (
+    <VisuallyHiddenSpan {...delegated} role={role}>
+      {children}
+    </VisuallyHiddenSpan>
+  );
 }
