@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SkipNavContent, SkipNavLink } from '@reach/skip-nav';
-
 import { APOD } from './interfaces/apod.interface';
 
+import DateForm from './components/date-form/date-form.component';
 import Post from './components/post/post.component';
 import Spinner from './components/spinner/spinner.component';
 
@@ -19,15 +19,18 @@ function App() {
 
   return (
     <React.Fragment>
+      <SkipNavLink />
       <main className="container">
-        <SkipNavLink />
-        <h1>
-          Spacetagram
-          <span role="img" aria-label="rocket">
-            🚀
-          </span>
-        </h1>
-        <p>Brought to you by NASA's Astronomy Photo of the Day (APOD) API</p>
+        <section>
+          <h1>
+            Spacetagram
+            <span role="img" aria-label="rocket">
+              🚀
+            </span>
+          </h1>
+          <p>Brought to you by NASA's Astronomy Photo of the Day (APOD) API</p>
+        </section>
+        <DateForm setAPODs={setAPODs} />
         <SkipNavContent />
         <section>
           {apods.length ? (
