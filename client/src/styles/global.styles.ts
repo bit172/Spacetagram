@@ -7,10 +7,8 @@ const GlobalStyles = createGlobalStyle`
   --off-white: #F5F5F5; 
   --black: #000000;
   --bg-primary: #e3e3e3;
-  --instagram-purple: #9e33b6;
-  --header-z-index: 20;
-  --header-height: 100px;
-  --header-mobile-height: 63px;
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: #0000ff;
   }
   html {
     background: var(--bg-primary);
@@ -39,6 +37,11 @@ const GlobalStyles = createGlobalStyle`
     ${media.greaterThan('laptop')`
       padding: 0 50px
     `}
+  }
+  .rdp {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 10px;
   }
 `;
 

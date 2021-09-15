@@ -1,9 +1,9 @@
-import express, { Application } from 'express';
+import express, { Application, Request } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 import db from './config/database';
-// import nasaApiInstance from "./nasa-api";
+import nasaApiInstance from './nasa-api';
 import path from 'path';
 import { sampleData } from './sample-data';
 
@@ -24,6 +24,15 @@ app.get('/api/', async (req, res) => {
   //   params: { start_date: "2021-09-01", end_date: "2021-09-10" },
   // });
   res.json(sampleData);
+});
+
+app.post('/api/', async (req: Request, res) => {
+  const { start_date, end_date } = req.body;
+  const nasaRes = await nasaApiInstance({
+    method: 'GET',
+    params: { start_date, end_date },
+  });
+  res.json(nasaRes.data);
 });
 
 if (process.env.NODE_ENV === 'production') {
