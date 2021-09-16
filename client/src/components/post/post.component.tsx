@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { APOD } from '../../interfaces/apod.interface';
+import { LikeStorage } from '../../interfaces/like-storage.interface';
 import Like from '../like/like.component';
 import VideoWrapper from '../video-wrapper/video-wrapper.component';
 
@@ -38,25 +39,23 @@ const createMediaElement = (apod: APOD) => {
   return media;
 };
 
+const getLikeStorage = (): LikeStorage => {
+  const likeStorageItem = window.localStorage.getItem('likes');
+  return likeStorageItem ? JSON.parse(likeStorageItem) : {};
+};
+
 export default function Post({ apod }: PostProps) {
   const [like, setLike] = useState(false);
   const [isLikeAnimated, setIsLikeAnimated] = useState(false);
 
   useEffect(() => {
-    const likeStorageItem = window.localStorage.getItem('likes');
-    const likeStorage: { [x: string]: boolean } = likeStorageItem
-      ? JSON.parse(likeStorageItem)
-      : {};
+    const likeStorage = getLikeStorage();
     if (likeStorage[apod.date]) setLike(true);
   }, [apod.date]);
 
   const handleLike = () => {
     setIsLikeAnimated(true);
-    const likeStorageItem = window.localStorage.getItem('likes');
-    const likeStorage: { [x: string]: boolean } = likeStorageItem
-      ? JSON.parse(likeStorageItem)
-      : {};
-
+    const likeStorage = getLikeStorage();
     if (like) delete likeStorage[apod.date];
     else likeStorage[apod.date] = true;
     window.localStorage.setItem('likes', JSON.stringify(likeStorage));
