@@ -14,19 +14,32 @@ const GlobalStyles = createGlobalStyle`
     background: var(--bg-primary);
     font-size: 16px;
   }
+
+  /* Scroll Bar Styles */
+  body::-webkit-scrollbar {
+    width: 12px;
+  }
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--black) var(--white);
+  }
+  body::-webkit-scrollbar-track {
+    background: var(--white);
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--black) ;
+    border-radius: 6px;
+    border: 3px solid var(--white);
+  }
+
   body {
     margin: 30px 0;
     font-size: 1.1rem;
-  }
-  p {
-    letter-spacing: 1.03px;
-    line-height: 1.6
   }
   img {
     max-width: 100%;
   }
   main {
-    min-height: 1000px;
     margin-bottom: 1rem;
   }
   .container {
@@ -38,6 +51,7 @@ const GlobalStyles = createGlobalStyle`
       padding: 0 50px
     `}
   }
+   /* Day Picker Styles  */
   .rdp {
     background: var(--white);
     border-radius: 10px;
