@@ -8,7 +8,8 @@ const GlobalStyles = createGlobalStyle`
   --black: #000000;
   --bg-primary: #e3e3e3;
   --rdp-cell-size: 40px;
-  --rdp-accent-color: #0000ff;
+  --rdp-accent-color: #4583ff;
+  --rdp-outline: 2px solid var(--black);
   }
   html {
     background: var(--bg-primary);
