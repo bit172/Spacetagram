@@ -11,6 +11,11 @@ const DateFormSectionWrapper = styled.section`
   margin-bottom: 10px;
   .date-toggle {
     display: block;
+    background: var(--white);
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    box-shadow: 0px 0px 4px 1px #9b9b9b;
   }
 `;
 
@@ -21,8 +26,11 @@ const DateFormWrapper = styled.form`
   margin-bottom: 10px;
   .submit {
     display: block;
-    width: 100px;
-    height: 50px;
+    background: var(--white);
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    box-shadow: 0px 0px 4px 1px #9b9b9b;
   }
 `;
 
@@ -83,7 +91,7 @@ export default function DateForm({ setAPODs }: DateFormProps) {
   return (
     <DateFormSectionWrapper>
       <button className="date-toggle" type="button" onClick={handleToggleClick}>
-        {showForm ? 'Hide' : 'Show'} date range form
+        {showForm ? 'Hide' : 'Show'} date range
       </button>
       {showForm && (
         <DateFormWrapper onSubmit={handleSubmit}>
