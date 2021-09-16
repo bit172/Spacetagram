@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { APOD } from '../../interfaces/apod.interface';
 import Like from '../like/like.component';
@@ -38,6 +39,30 @@ const createMediaElement = (apod: APOD) => {
 };
 
 export default function Post({ apod }: PostProps) {
+  const [like, setLike] = useState(false);
+  const [isLikeAnimated, setIsLikeAnimated] = useState(false);
+
+  useEffect(() => {
+    const likeStorageItem = window.localStorage.getItem('likes');
+    const likeStorage: { [x: string]: boolean } = likeStorageItem
+      ? JSON.parse(likeStorageItem)
+      : {};
+    if (likeStorage[apod.date]) setLike(true);
+  }, [apod.date]);
+
+  const handleLike = () => {
+    setIsLikeAnimated(true);
+    const likeStorageItem = window.localStorage.getItem('likes');
+    const likeStorage: { [x: string]: boolean } = likeStorageItem
+      ? JSON.parse(likeStorageItem)
+      : {};
+
+    if (like) delete likeStorage[apod.date];
+    else likeStorage[apod.date] = true;
+    window.localStorage.setItem('likes', JSON.stringify(likeStorage));
+    setLike(!like);
+  };
+
   return (
     <PostContainer>
       {createMediaElement(apod)}
@@ -46,7 +71,12 @@ export default function Post({ apod }: PostProps) {
         <p>{apod.date}</p>
         <p>{apod.explanation}</p>
         <div className="button-row">
-          <Like />
+          <Like
+            active={like}
+            setActive={setLike}
+            handleActive={handleLike}
+            isAnimated={isLikeAnimated}
+          />
         </div>
       </section>
     </PostContainer>

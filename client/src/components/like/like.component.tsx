@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FcLike } from 'react-icons/fc';
 
@@ -26,8 +26,15 @@ const LikeWrapper = styled.div`
       }
     }
   }
-  &.active {
+  &.activating {
     animation: active 0.4s;
+    svg {
+      path {
+        fill: #f44336;
+      }
+    }
+  }
+  &.active {
     svg {
       path {
         fill: #f44336;
@@ -50,19 +57,29 @@ const LikeWrapper = styled.div`
   }
 `;
 
-export default function Like() {
-  const [active, setActive] = useState(false);
+export interface LikeProps {
+  active: boolean;
+  setActive: (active: boolean) => void;
+  handleActive: () => void;
+  isAnimated: boolean;
+}
 
+export default function Like({ active, handleActive, isAnimated }: LikeProps) {
+  const computeClassName = () => {
+    if (isAnimated && active) return 'activating';
+    else if (!isAnimated && active) return 'active';
+    return '';
+  };
   return (
     <LikeWrapper
       tabIndex={0}
       role="button"
       aria-label="like"
-      className={active ? 'active' : ''}
+      className={computeClassName()}
       aria-pressed={active}
-      onClick={() => setActive(!active)}
+      onClick={handleActive}
       onKeyPress={(ev: React.KeyboardEvent<HTMLDivElement>) => {
-        ev.key === 'Enter' && setActive(!active);
+        ev.key === 'Enter' && handleActive();
       }}
     >
       <FcLike size={20} aria-hidden={true} />
