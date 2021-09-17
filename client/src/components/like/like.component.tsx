@@ -10,7 +10,7 @@ const LikeWrapper = styled.div`
   width: 50px;
   height: 50px;
   box-shadow: 0px 0px 4px 1px #9b9b9b;
-  transition: 0.2s;
+  transition: color 0.2s;
   svg {
     display: block;
     margin: auto;
@@ -82,7 +82,7 @@ export default function Like({ active, handleActive, isAnimated }: LikeProps) {
         ev.key === 'Enter' && handleActive();
       }}
     >
-      <FcLike size={20} aria-hidden={true} />
+      <FcLike size={20} aria-hidden />
     </LikeWrapper>
   );
 }
