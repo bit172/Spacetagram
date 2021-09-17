@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { APOD } from '../../interfaces/apod.interface';
 import { LikeStorage } from '../../interfaces/like-storage.interface';
+
 import Like from '../like/like.component';
+import ShareableLink from '../shareable-link/shareable-link.component';
 import VideoWrapper from '../video-wrapper/video-wrapper.component';
 
 const PostContainer = styled.article`
@@ -22,6 +25,7 @@ const PostContainer = styled.article`
   }
   .button-row {
     display: flex;
+    gap: 10px;
     justify-content: flex-end;
   }
 `;
@@ -70,6 +74,7 @@ export default function Post({ apod }: PostProps) {
         <p>{apod.date}</p>
         <p>{apod.explanation}</p>
         <div className="button-row">
+          <ShareableLink link={apod.url} />
           <Like
             active={like}
             setActive={setLike}
