@@ -47,6 +47,7 @@ export default function ShareableLink({ link }: ShareableLinkProps) {
       onKeyPress={(ev: React.KeyboardEvent<HTMLDivElement>) => {
         ev.key === 'Enter' && handleLinkCopy();
       }}
+      data-testid="shareable-link-id"
     >
       <AiOutlineLink size={25} aria-hidden />
     </ShareableLinkWrapper>
