@@ -6,9 +6,11 @@ import db from './config/database';
 import nasaApiInstance from './nasa-api';
 import path from 'path';
 import { sampleData } from './sample-data';
+import { format, subDays } from 'date-fns';
 
 const app: Application = express();
 const PORT = process.env.PORT || 5000;
+const NASA_DATE_FORMAT = 'yyyy-MM-dd';
 
 db.authenticate()
   .then(() => console.log('Connection established'))
@@ -16,14 +18,21 @@ db.authenticate()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_BASE_URL }));
 
 app.get('/api/', async (req, res) => {
-  // const nasaRes = await nasaApiInstance({
-  //   method: "GET",
-  //   params: { start_date: "2021-09-01", end_date: "2021-09-10" },
-  // });
-  res.json(sampleData);
+  const currentDate = new Date(Date.now());
+  const tenDaysBefore = subDays(currentDate, 10);
+  const formattedCurrentDate = format(currentDate, NASA_DATE_FORMAT);
+  const formattedTenDaysBefore = format(tenDaysBefore, NASA_DATE_FORMAT);
+  const nasaRes = await nasaApiInstance({
+    method: 'GET',
+    params: {
+      start_date: formattedTenDaysBefore,
+      end_date: formattedCurrentDate,
+    },
+  });
+  res.json(nasaRes.data);
 });
 
 app.post('/api/', async (req: Request, res) => {
