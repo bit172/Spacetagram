@@ -81,6 +81,7 @@ export default function Like({ active, handleActive, isAnimated }: LikeProps) {
       onKeyPress={(ev: React.KeyboardEvent<HTMLDivElement>) => {
         ev.key === 'Enter' && handleActive();
       }}
+      data-testid="like-id"
     >
       <FcLike size={20} aria-hidden />
     </LikeWrapper>
