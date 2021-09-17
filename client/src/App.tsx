@@ -3,8 +3,7 @@ import { SkipNavContent, SkipNavLink } from '@reach/skip-nav';
 import { APOD } from './interfaces/apod.interface';
 
 import DateForm from './components/date-form/date-form.component';
-import Post from './components/post/post.component';
-import Spinner from './components/spinner/spinner.component';
+import PostList from './components/post-list/post-list.component';
 
 import '@reach/skip-nav/styles.css';
 
@@ -32,13 +31,7 @@ function App() {
         </section>
         <DateForm setAPODs={setAPODs} />
         <SkipNavContent />
-        <section>
-          {apods.length ? (
-            apods.map(apod => <Post key={apod.date} apod={apod} />)
-          ) : (
-            <Spinner size={50} />
-          )}
-        </section>
+        <PostList apods={apods} />
       </main>
     </React.Fragment>
   );
